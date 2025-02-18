@@ -1,3 +1,5 @@
+## From Original creator
+
 git filter-repo is a versatile tool for rewriting history, which includes
 [capabilities I have not found anywhere
 else](#design-rationale-behind-filter-repo).  It roughly falls into the
@@ -62,7 +64,29 @@ following apply:
     a module/library
 
 # How do I use it?
+1. Exposed secrets removal
+```
+git pull
+cat >> expression <<EOF
+literal:Eas..==>REDACTED
+literal:eyJh..==>REDACTED
+EOF
+git filter-repo --replace-text expression.txt --force
+git remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
 
+git push --set-upstream origin dev-nta -f
+
+
+```
+2. Binary from nonsecure sources removal
+```
+git pull
+for i in "*/libcrypto.so.1.1" "*/libssl.so" "*/byteNTA" "*/ttgwagent" "*/ttgwantiddosagent" "*/bytehunter" "*/libhs.so" "*/libcrypto.so" "*/libhs.so.5" "*/libssl.so.1.1"; do
+    git filter-repo --invert-paths --path-glob "$i"donegit remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
+git remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
+
+git push --set-upstream origin dev-nta -f 
+```
 For comprehensive documentation:
   * see the [user manual](https://htmlpreview.github.io/?https://github.com/newren/git-filter-repo/blob/docs/html/git-filter-repo.html)
   * alternative formating of the user manual is available on various
