@@ -72,7 +72,7 @@ literal:Eas..==>REDACTED
 literal:eyJh..==>REDACTED
 EOF
 git filter-repo --replace-text expression.txt --force
-git remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
+git remote add -t dev-nta origin git@abc.byted.org:abc/def.git  
 
 git push --set-upstream origin dev-nta -f
 
@@ -83,7 +83,7 @@ git push --set-upstream origin dev-nta -f
 git pull
 for i in "*/libcrypto.so.1.1" "*/libssl.so" "*/byteNTA" "*/ttgwagent" "*/ttgwantiddosagent" "*/bytehunter" "*/libhs.so" "*/libcrypto.so" "*/libhs.so.5" "*/libssl.so.1.1"; do
     git filter-repo --invert-paths --path-glob "$i"donegit remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
-git remote add -t dev-nta origin git@code.byted.org:security/ttp-nta.git  
+git remote add -t dev-nta origin git@abc.byted.org:abc/def.git  
 
 git push --set-upstream origin dev-nta -f 
 ```
